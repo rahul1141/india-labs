@@ -3,15 +3,14 @@ AWSTemplateFormatVersion: 2010-09-09
 Parameters:
   CodePipelineBucket:
     Type: String
-    Description: 'S3 bucket for codePipeline artifacts.'
+    Description: 'The S3 bucket for CodePipeline artifacts.'
 
-
-Resoruces:
+Resources:
   CodePipelineS3Bucket:
     Type: AWS::S3::Bucket
     DeletionPolicy: Retain
-    Properties: 
-      BucketName: !Ref CodePipelineS3Bucket
+    Properties:
+      BucketName: !Ref CodePipelineBucket
       PublicAccessBlockConfiguration:
         BlockPublicAcls: true
         BlockPublicPolicy: true
