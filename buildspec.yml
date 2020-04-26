@@ -20,3 +20,9 @@ artifacts:
     - package.json
     - appspec.yml
     - 'node_modules/**/*'
+    - 'vendor/**/*'
+    - 'js/**/*'
+    - 'images/icons/**/*'
+    - 'css/**/*'
+    - 'fonts/**/*'
+    - index.html
