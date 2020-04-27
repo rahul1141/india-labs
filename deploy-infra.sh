@@ -14,6 +14,10 @@ GH_ACCESS_TOKEN=$(cat ~/.github/india-labs-access-token)
 GH_OWNER=$(cat ~/.github/india-labs-owner)
 GH_REPO=$(cat ~/.github/india-labs-repo)
 GH_BRANCH=master
+DOMAIN=india-labs.com
+CERT=`aws acm list-certificates --region $REGION --profile india-labs-profile \
+      --output text --query "CertificateSummaryList[?DomainName=='$DOMAIN'].CertificateArn | [0]"`
+
 echo -e "\n\n=========== Deploying setup.yml ==========="
 
 aws cloudformation deploy \
@@ -46,7 +50,9 @@ aws cloudformation deploy \
   GitHubRepo=$GH_REPO \
   GitHubBranch=$GH_BRANCH \
   GitHubPersonalAccessToken=$GH_ACCESS_TOKEN \
-  CodePipelineBucket=$CODEPIPELINE_BUCKET
+  CodePipelineBucket=$CODEPIPELINE_BUCKET \
+  Domain=$DOMAIN \
+  Certificate=$CERT
 
 if [ $? -eq 0 ]; then
 aws cloudformation list-exports \
